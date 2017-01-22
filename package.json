@@ -4,11 +4,16 @@
   "description": "Client-side router for the browser",
   "main": "index.js",
   "scripts": {
-    "test": "rimraf .ava/**/* && tsc -p tsconfig.test.json && ava .ava",
+    "test": "rimraf .ava/**/* && tsc -p tsconfig.test.json && ava .ava/**/*.spec.js",
     "clean": "rimraf .ava/**/*",
     "ava": "ava",
-    "ava-watch": "ava .ava -w",
+    "ava-watch": "cls && ava .ava/**/*.spec.js -w",
     "test-watch": "tsc -p tsconfig.test.json -w"
+  },
+  "ava": {
+    "require": [
+      "./test/helpers/setup-browser-env.js"
+    ]
   },
   "repository": {
     "type": "git",
@@ -25,6 +30,12 @@
     "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
     "babel-preset-es2015": "^6.22.0",
+    "browser-env": "^2.0.19",
+    "gulp": "^3.9.1",
+    "gulp-ava": "^0.15.0",
+    "gulp-shell": "^0.5.2",
+    "gulp-typescript": "^3.1.4",
+    "gulp-util": "^3.0.8",
     "rimraf": "^2.5.4",
     "ts-loader": "^2.0.0",
     "typescript": "^2.1.5",
