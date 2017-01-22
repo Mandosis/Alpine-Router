@@ -19,6 +19,3 @@ test('create router', t => {
   
   t.fail('Router creation failed');
 });
-
-test.todo('change url');
-test.todo('insert template into dom');
