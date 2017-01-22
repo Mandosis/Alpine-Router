@@ -1,0 +1,4 @@
+node_modules
+.ava
+npm-debug.log
+debug.log
