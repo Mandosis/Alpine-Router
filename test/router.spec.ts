@@ -60,3 +60,22 @@ test('get route path with multiple tokens', (t) => {
 
   t.deepEqual(result, expected, 'Tokens do not match expectations');
 });
+
+test('match top level path', (t) => {
+  t.true(router.navigate(router.routes[0].path), 'Path not matched');
+});
+
+test('match child route', (t) => {
+  t.skip;
+});
+
+test('match wild card', (t) => {
+  t.skip;
+});
+
+test('update url', (t) => {
+  let path = router.routes[1].path;
+  router.navigate(router.routes[1].path);
+
+  t.deepEqual(location.hash, '#/' + path, 'Url not updated properly');
+})
