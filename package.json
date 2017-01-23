@@ -4,13 +4,19 @@
   "description": "Client-side router for the browser",
   "main": "index.js",
   "scripts": {
-    "test": "rimraf .ava/**/* && tsc -p tsconfig.test.json && ava .ava/**/*.spec.js",
+    "test": "rimraf .ava/**/* && tsc -p tsconfig.test.json && ava",
     "clean": "rimraf .ava/**/*",
     "ava": "ava",
-    "ava-watch": "cls && ava .ava/**/*.spec.js -w",
+    "ava-watch": "cls && ava -w",
     "test-watch": "tsc -p tsconfig.test.json -w"
   },
   "ava": {
+    "files": [
+      ".ava/test/**/*.spec.js"
+    ],
+    "source": [
+      ".ava/src/**/*.js"
+    ],
     "require": [
       "./test/helpers/setup-browser-env.js"
     ]
