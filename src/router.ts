@@ -8,6 +8,12 @@ export interface Route {
   children?: Route[];
 }
 
+enum MatchStatus {
+  full,
+  partial,
+  none
+}
+
 /**
  * Client-side router for single page applications
  */
@@ -48,37 +54,65 @@ export default class Router {
    * @returns Success of navigation.
    */
   public navigate(path: string): boolean {
+
+    path = this.sanitizePath(path);
     const pathTokens = this.getPathTokens(path);
+    let matchResult = this._getRoute(this.routes, pathTokens);
 
-    if (pathTokens[0] === '#') {
-      pathTokens.splice(0);
+    if (matchResult != undefined) {
+      this._changeBrowserUrl(path);
+      // render view
+      return true;
     }
 
-    for (let route of this._routes) {
-      const routeTokens = this.getPathTokens(route.path);
-
-      let tokenMap = this._compareTokens(routeTokens, pathTokens);
-      let consecutiveCount = this._getConsecutiveTokenMatchCount(tokenMap);
-      
-      let fullPathMatch = (consecutiveCount === tokenMap.size);
-      let partialMatch = (consecutiveCount < tokenMap.size);
-
-      if (fullPathMatch) {
-        // Full path match
-        this._changeBrowserUrl(route.path);
-        // Update router-outlet
-        // this._addTemplateToDom(route.template);
-        return true;
-      } else if (partialMatch) {
-        // Partial path match. Check for child routes
-      } else {
-        // No match. Check for wild card or throw error
-        return false;
-      }
-      
-    }
     
     return false;
+  }
+
+  /**
+   * Sanitize path and remove # and / from the beginning
+   * 
+   * @param path  Path to sanitize
+   * @return      Sanitized path
+   */
+  private sanitizePath(path: string): string {
+    if (path.charAt(0) === '#') {
+        path = path.slice(1, path.length);
+    }
+
+    if (path.charAt(0) === '/' && path !== '/') {
+        path = path.slice(1, path.length);;
+    }
+
+    return path;
+   }
+
+  /**
+   * Get matching route
+   * 
+   * @param routes            Route to match
+   * @param candidateTokens   Tokens to match a route with
+   */
+  private _getRoute(routes: Route[], candidateTokens: string[]): Route {
+    for (let route of routes) {
+      const routeTokens = this.getPathTokens(route.path);
+      const tokenMap = this._compareTokens(routeTokens, candidateTokens);
+      const consecutiveCount = this._getConsecutiveTokenMatchCount(tokenMap);
+
+      const isFullPathMatch = (consecutiveCount === tokenMap.size);
+      const isPartialMatch = (consecutiveCount < tokenMap.size);
+
+      if (isFullPathMatch) {
+        return route;
+      }
+      
+      if (isPartialMatch && route.children) {
+        const remainingTokens = routeTokens.slice(consecutiveCount - 1, routeTokens.length);
+        return this._getRoute(route.children, remainingTokens);
+      }
+    }
+
+    return undefined;
   }
 
   /**
@@ -141,13 +175,14 @@ export default class Router {
    * @return          modified url adjusted for base tag if it exists
    */
   private _getAndAppendBaseHref(path: string) {
+    if (path === '/') { path = '' }
     let baseHref = this._baseHrefValue;
 
     if (baseHref && baseHref !== '/') {
       return baseHref + path;
     }
 
-    if (baseHref&& baseHref === '/') {
+    if (baseHref && baseHref === '/') {
       return path;
     }
 

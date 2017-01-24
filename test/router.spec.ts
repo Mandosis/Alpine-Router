@@ -14,6 +14,16 @@ let routes: Route[] = [
   {
     path: 'foo/bar',
     template: `<h1>Foo Bar</h1>`
+  },
+  {
+    path: 'parent',
+    template: '<h1>Parent Route</h1>',
+    children: [
+      {
+        path: 'child',
+        template: '<h2>Child Route</h2>'
+      }
+    ]
   }
 ];
 
@@ -53,7 +63,7 @@ test('get route path with a single token', (t) => {
   t.deepEqual(result, expected, 'Tokens do not match expectations');
 });
 
-test('get route path with multiple tokens', (t) => {
+test('get tokens from path with multiple slugs', (t) => {
   let path = router.routes[2].path;
   let expected = ['foo', 'bar'];
   let result = router.getPathTokens(path);
@@ -61,21 +71,30 @@ test('get route path with multiple tokens', (t) => {
   t.deepEqual(result, expected, 'Tokens do not match expectations');
 });
 
-test('match top level path', (t) => {
-  t.true(router.navigate(router.routes[0].path), 'Path not matched');
+test('match route containing only /', (t) => {
+  t.true(router.navigate(router.routes[0].path), 'Path containing only / not matched');
+});
+
+test('match route containing only one slug', (t) => {
+  t.true(router.navigate(router.routes[1].path), 'Path not matched');
+});
+
+test('match route containing multiple slugs', (t) => {
+  t.true(router.navigate(router.routes[2].path), 'Path with multiple slugs not matched');
 });
 
 test('match child route', (t) => {
-  t.skip;
-});
+  t.true(router.navigate(router.routes[3].path + '/' + router.routes[3].children[0].path))
+})
 
 test('match wild card', (t) => {
   t.skip;
 });
 
-test('update url', (t) => {
+test('update url without base href', (t) => {
   let path = router.routes[1].path;
+  let expectedPath = '#/' + path;
   router.navigate(router.routes[1].path);
 
-  t.deepEqual(location.hash, '#/' + path, 'Url not updated properly');
-})
+  t.deepEqual(location.hash, expectedPath, 'Url not updated properly without base href');
+});
