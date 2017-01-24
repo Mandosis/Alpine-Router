@@ -8,12 +8,6 @@ export interface Route {
   children?: Route[];
 }
 
-enum MatchStatus {
-  full,
-  partial,
-  none
-}
-
 /**
  * Client-side router for single page applications
  */
