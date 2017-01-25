@@ -52,13 +52,17 @@ export default class Router {
     path = this.sanitizePath(path);
     const pathTokens = this.getPathTokens(path);
     let matchResult = this._getRoute(this.routes, pathTokens);
+    let wildCardResult: Route;
 
-    if (matchResult != undefined) {
-      this._changeBrowserUrl(path);
-      // render view
-      return true;
+    if (!matchResult) {
+      wildCardResult = this._getRoute(this.routes, ['*']);
     }
 
+    if (matchResult || wildCardResult) {
+      this._changeBrowserUrl(path);
+      // render view
+      return true
+    }
     
     return false;
   }
@@ -92,9 +96,8 @@ export default class Router {
       const routeTokens = this.getPathTokens(route.path);
       const tokenMap = this._compareTokens(routeTokens, candidateTokens);
       const consecutiveCount = this._getConsecutiveTokenMatchCount(tokenMap);
-
       const isFullPathMatch = (consecutiveCount === tokenMap.size);
-      const isPartialMatch = (consecutiveCount < tokenMap.size);
+      const isPartialMatch = (consecutiveCount < tokenMap.size && consecutiveCount !== 0);
 
       if (isFullPathMatch) {
         return route;

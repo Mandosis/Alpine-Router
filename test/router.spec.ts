@@ -24,6 +24,10 @@ let routes: Route[] = [
         template: '<h2>Child Route</h2>'
       }
     ]
+  },
+  {
+    path: '*',
+    template: '<h1>404</h1>'
   }
 ];
 
@@ -88,7 +92,7 @@ test('match child route', (t) => {
 })
 
 test('match wild card', (t) => {
-  t.skip;
+  t.true(router.navigate('thatsNoMoon'));
 });
 
 test('update url without base href', (t) => {
