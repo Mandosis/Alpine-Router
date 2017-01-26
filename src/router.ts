@@ -63,6 +63,8 @@ export default class Router {
       // render view
       return true
     }
+
+    console.error(`Router: Unable to find route for '${path}'`)
     
     return false;
   }
