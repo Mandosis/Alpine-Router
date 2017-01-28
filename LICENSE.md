@@ -1,10 +1,3 @@
-# Router
-
-[![CircleCI](https://circleci.com/gh/Mandosis/router.svg?style=svg)](https://circleci.com/gh/Mandosis/router)
-
-Client-side router built for the web
-
-# License
 MIT License
 
 Copyright (c) 2017 Chris Rabuse
