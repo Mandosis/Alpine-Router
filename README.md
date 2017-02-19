@@ -1,4 +1,5 @@
 # Router
+[![Standard - JavaScript Style Guide](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
 [![CircleCI](https://circleci.com/gh/Mandosis/router.svg?style=svg)](https://circleci.com/gh/Mandosis/router)
 
