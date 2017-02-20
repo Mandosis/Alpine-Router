@@ -3,7 +3,9 @@
 
 [![CircleCI](https://circleci.com/gh/Mandosis/router.svg?style=svg)](https://circleci.com/gh/Mandosis/router)
 
-Client-side router built for the web
+Client-side router built for the web.
+
+**Route matching works, but does not add the template html to the DOM yet**
 
 # License
 MIT License
