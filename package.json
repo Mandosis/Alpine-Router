@@ -2,13 +2,15 @@
   "name": "alpine-router",
   "version": "0.0.1",
   "description": "Client-side router for the browser",
-  "main": "index.js",
+  "main": "lib/browser/router.js",
   "scripts": {
     "test": "rimraf .ava/**/* && tsc -p tsconfig.test.json && ava",
     "clean": "rimraf .ava/**/*",
     "ava": "ava",
     "ava-watch": "cls && ava -w",
-    "test-watch": "tsc -p tsconfig.test.json -w"
+    "test-watch": "tsc -p tsconfig.test.json -w",
+    "build": "webpack",
+    "watch": "webpack -w"
   },
   "ava": {
     "files": [
@@ -33,18 +35,13 @@
   "homepage": "https://github.com/Mandosis/alpine-router#readme",
   "devDependencies": {
     "ava": "^0.17.0",
-    "babel-core": "^6.22.1",
-    "babel-loader": "^6.2.10",
-    "babel-preset-es2015": "^6.22.0",
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-preset-env": "^1.1.10",
     "browser-env": "^2.0.19",
-    "gulp": "^3.9.1",
-    "gulp-ava": "^0.15.0",
-    "gulp-shell": "^0.5.2",
-    "gulp-typescript": "^3.1.4",
-    "gulp-util": "^3.0.8",
     "rimraf": "^2.5.4",
-    "ts-loader": "^2.0.0",
+    "ts-loader": "^2.0.1",
     "typescript": "^2.1.5",
-    "webpack": "^2.2.0"
+    "webpack": "^2.2.1"
   }
 }

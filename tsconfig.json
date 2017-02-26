@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "module": "es6",
-    "target": "es6",
+    "module": "es2015",
+    "target": "es2015",
     "sourceMap": true,
     "moduleResolution": "node",
     "experimentalDecorators": true,
@@ -9,6 +9,9 @@
     "removeComments": true,
     "noImplicitAny": true
   },
+  "include": [
+    "src/**/*.ts"
+  ],
   "exclude": [
     "node_modules"
   ],

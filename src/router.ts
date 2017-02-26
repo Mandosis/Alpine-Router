@@ -15,8 +15,13 @@ export default class Router {
   private _routes: Route[] = [];
 
   constructor(routes: Route[]) {
-    for (let route of routes) {
-      this._routes.push(route);
+
+    if (Array.isArray(routes)) {
+      for (let route of routes) {
+        this._routes.push(route);
+      }
+    } else {
+      console.error('Router was not created. Did you enter an array of objects in the following format [{ path: "example", template: "<h1>Example</h1>"}]?')
     }
   }
 

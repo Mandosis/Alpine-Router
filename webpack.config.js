@@ -15,17 +15,18 @@ module.exports = {
     },
     module: {
         loaders: [
-            { test: /\.ts$/, exclude: /node_modules/, loaders: ['babel-loader?presets[]=es2015', 'ts-loader'] }
+            { test: /\.ts$/, exclude: /node_modules/, loaders: ['babel-loader?presets[]=env', 'ts-loader'] }
         ]
     },
     entry: {
-        router: root('src/router.js')
+        router: root('src/router.ts')
     },
     output: {
         publicPath: path.resolve(__dirname),
-        filename: '[name].min.js',
-        sourceMapFilename: '[name].min.map',
-        path: root('dist')
+        filename: '[name].js',
+        sourceMapFilename: '[name].js.map',
+        path: root('lib/browser'),
+        library: 'Router'
     },
     plugins: [
         new UglifyJsPlugin({
