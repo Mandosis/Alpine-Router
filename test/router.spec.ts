@@ -32,8 +32,8 @@ let routes: Route[] = [
 ];
 
 test.before(t => {
-  router = new Router(routes)
   document.body.innerHTML = '<router-outlet></router-outlet>'
+  router = new Router(routes)
 });
 
 test('create and set routes', t => {
