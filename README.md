@@ -1,11 +1,42 @@
 # Router
-[![Standard - JavaScript Style Guide](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
-
 [![CircleCI](https://circleci.com/gh/Mandosis/router.svg?style=svg)](https://circleci.com/gh/Mandosis/router)
 
-Client-side router built for the web.
+A no dependancy client-side router featuring child routes.
 
-**Route matching works, but does not add the template html to the DOM yet**
+# Instructions
+
+Create a new router in your JavaScript file
+
+```javascript
+import Router from 'router';
+
+const router = new Router([
+  {
+    path: '/',
+    template: `<h1>Hello World!</h1>`
+  }
+]);
+```
+
+In your html file add the outlet
+```html
+<router-outlet></router-outlet>
+```
+
+To change routes use the navigate function
+```javascript
+router.navigate('/');
+```
+
+# Development
+
+Clone the repository and run `yarn`.
+
+**Commands:**
+- To build the project run `yarn run build`
+- To watch files for changes and build run `yarn run watch`
+- To run unit tests run `yarn run test`
+- To run tests automatically run `yarn run test-watch` and in a new tab or window `yarn run ava-watch`
 
 # License
 MIT License
