@@ -2,14 +2,14 @@
   "name": "alpine-router",
   "version": "0.0.1",
   "description": "Client-side router for the browser",
-  "main": "lib/browser/router.js",
+  "main": "lib/es6/router.js",
   "scripts": {
     "test": "rimraf .ava/**/* && tsc -p tsconfig.test.json && ava",
     "clean": "rimraf .ava/**/*",
     "ava": "ava",
     "ava-watch": "cls && ava -w",
     "test-watch": "tsc -p tsconfig.test.json -w",
-    "build": "webpack",
+    "build": "webpack && tsc",
     "watch": "webpack -w"
   },
   "ava": {

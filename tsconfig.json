@@ -7,7 +7,8 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "removeComments": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "outDir": "lib/es6"
   },
   "include": [
     "src/**/*.ts"

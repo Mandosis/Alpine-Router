@@ -6,7 +6,9 @@ function root (args) {
     return path.join.apply(path, [__dirname].concat(args))
 }
 
-module.exports = {
+module.exports = [
+// Minified Browser
+{
     context: __dirname,
     target: 'web',
     devtool: 'source-map',
@@ -23,8 +25,8 @@ module.exports = {
     },
     output: {
         publicPath: path.resolve(__dirname),
-        filename: '[name].js',
-        sourceMapFilename: '[name].js.map',
+        filename: '[name].min.js',
+        sourceMapFilename: '[name].min.js.map',
         path: root('lib/browser'),
         library: 'Router'
     },
@@ -51,4 +53,36 @@ module.exports = {
         Buffer: false
     }
     
-}
+},
+// Non minified browser
+{
+    context: __dirname,
+    target: 'web',
+    devtool: 'source-map',
+    resolve: {
+        extensions: ['.ts']
+    },
+    module: {
+        loaders: [
+            { test: /\.ts$/, exclude: /node_modules/, loaders: ['babel-loader?presets[]=env', 'ts-loader'] }
+        ]
+    },
+    entry: {
+        router: root('src/router.ts')
+    },
+    output: {
+        publicPath: path.resolve(__dirname),
+        filename: '[name].js',
+        sourceMapFilename: '[name].js.map',
+        path: root('lib/browser'),
+        library: 'Router'
+    },
+    plugins: [],
+    node: {
+        global: true,
+        __dirname: true,
+        __filename: true,
+        process: true,
+        Buffer: false
+    }
+}]
