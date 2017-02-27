@@ -82,9 +82,7 @@ export default class Router {
       urlMap.set(token, false);
     }
 
-    let result = this._getRoute(this._routes, urlTokens, urlMap);
-
-    console.log(result);
+    let result = this._getRoutes(this._routes, urlTokens, urlMap);
 
     if (result.length > 0) {
       this._changeBrowserUrl(url);
@@ -96,7 +94,15 @@ export default class Router {
     return false;
   }
 
-  private _getRoute(routes: Route[], urlTokens: string[], urlMap: Map<string, boolean>, routeHistory?: Route[]): Route[] {
+  /**
+   * Match and return routes
+   * 
+   * @param routes Routes to match
+   * @param urlTokens URL Tokens
+   * @param urlMap URL Map
+   * @param routeHistory Route History
+   */
+  private _getRoutes(routes: Route[], urlTokens: string[], urlMap: Map<string, boolean>, routeHistory?: Route[]): Route[] {
     routeHistory = routeHistory || [];
 
     // iterate through routes
@@ -114,9 +120,8 @@ export default class Router {
       }
 
       if (isPartialMatch && route.children) {
-        console.log('Partial Match hit');
         routeHistory.push(route);
-        return this._getRoute(route.children, urlTokens, urlMap, routeHistory);
+        return this._getRoutes(route.children, urlTokens, urlMap, routeHistory);
       }
     }
 
@@ -228,9 +233,7 @@ export default class Router {
    */
   private _addTemplatesToDom(routes: Route[]): void {
     for (let it = 0; it < routes.length; it++) {
-      console.log(it, routes);
       const outlets = document.getElementsByTagName('router-outlet');
-      console.log('outlets', outlets)
 
       outlets[it].innerHTML = routes[it].template;
     }
