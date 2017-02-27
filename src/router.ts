@@ -23,6 +23,13 @@ export default class Router {
     } else {
       console.error('Router was not created. Did you enter an array of objects in the following format [{ path: "example", template: "<h1>Example</h1>"}]?')
     }
+
+    this._getWindowUrlAndNavigate();
+
+    window.onhashchange = () => {
+      this._getWindowUrlAndNavigate();
+    }
+
   }
 
   get routes(): Route[] {
@@ -179,6 +186,24 @@ export default class Router {
   }
 
   /**
+   * Gets the current window url and navigate
+   */
+  private _getWindowUrlAndNavigate() {
+    if (this._baseHrefValue) {
+      let location = window.location.pathname;
+
+      location = location.substring(
+        this._baseHrefValue.length,
+        location.length
+      );
+
+      return this.navigate(location);
+    }
+
+    this.navigate(window.location.hash);
+  }
+
+  /**
    * Changes url in address bar after the domain name
    * 
    * @param path  Path to change url to
@@ -234,6 +259,8 @@ export default class Router {
   private _addTemplatesToDom(routes: Route[]): void {
     for (let it = 0; it < routes.length; it++) {
       const outlets = document.getElementsByTagName('router-outlet');
+
+      if (!outlets[it]) { console.error('Router: router-outlet missing.')}
 
       outlets[it].innerHTML = routes[it].template;
     }
