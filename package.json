@@ -9,7 +9,7 @@
     "ava": "ava",
     "ava-watch": "cls && ava -w",
     "test-watch": "tsc -p tsconfig.test.json -w",
-    "build": "webpack && tsc",
+    "build": "webpack -p && tsc",
     "watch": "webpack -w"
   },
   "ava": {
@@ -34,6 +34,7 @@
   },
   "homepage": "https://github.com/Mandosis/alpine-router#readme",
   "devDependencies": {
+    "@types/whatwg-fetch": "^0.0.33",
     "ava": "^0.17.0",
     "babel-core": "^6.23.1",
     "babel-loader": "^6.3.2",

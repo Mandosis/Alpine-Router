@@ -19,7 +19,7 @@ const router = new Router([
 ```
 
 In your html file add the outlet
-```html
+```
 <router-outlet></router-outlet>
 ```
 

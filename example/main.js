@@ -14,5 +14,9 @@ let router = new Router.default([
         template: '<h2>Child Template</h2>'
       }
     ]
+  },
+  {
+    path: 'remote',
+    templateUrl: 'http://chrisrabuse.com'
   }
 ]);

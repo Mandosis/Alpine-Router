@@ -256,14 +256,38 @@ export default class Router {
    * 
    * @param routes    Matched routes
    */
-  private _addTemplatesToDom(routes: Route[]): void {
+  private _addTemplatesToDom(routes: Route[]) {
     for (let it = 0; it < routes.length; it++) {
       const outlets = document.getElementsByTagName('router-outlet');
 
       if (!outlets[it]) { console.error('Router: router-outlet missing.')}
 
-      outlets[it].innerHTML = routes[it].template;
+      if (routes[it].template) {
+        outlets[it].innerHTML = routes[it].template;
+      } else {
+        this._getRemoteTemplate(routes[it].templateUrl)
+          .then((template: string) => {
+            outlets[it].innerHTML = template;
+          })
+          .catch((err) => {
+            console.error(`Router: Failed to get template.\n${err}`);
+          });
+      }
+
     }
+  }
+
+  /**
+   * Get a remote html file for the template
+   * @param url Url for resource
+   */
+  private _getRemoteTemplate(url: string) {
+    return new Promise((resolve, reject) => {
+      window.fetch(url)
+        .then((response) => response.text())
+        .then((body: string) => resolve(body))
+        .catch((error: string) => reject(error));
+    });
   }
 
 }
