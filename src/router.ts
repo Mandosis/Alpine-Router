@@ -47,34 +47,6 @@ export default class Router {
   }
 
   /**
-   * Navigate to new path
-   * 
-   * @param path Path to navigate to.
-   * @returns Success of navigation.
-   */
-  public navigate(path: string): boolean {
-
-    path = this.sanitizePath(path);
-    const pathTokens = this.getPathTokens(path);
-    let matchResult = this._getRoute(this.routes, pathTokens);
-    let wildCardResult: Route;
-
-    if (!matchResult) {
-      wildCardResult = this._getRoute(this.routes, ['*']);
-    }
-
-    if (matchResult || wildCardResult) {
-      this._changeBrowserUrl(path);
-      // render view
-      return true
-    }
-
-    console.error(`Router: Unable to find route for '${path}'`)
-    
-    return false;
-  }
-
-  /**
    * Sanitize path and remove # and / from the beginning
    * 
    * @param path  Path to sanitize
@@ -93,53 +65,92 @@ export default class Router {
    }
 
   /**
-   * Get matching route
+   * Navigate to new path
    * 
-   * @param routes            Route to match
-   * @param candidateTokens   Tokens to match a route with
+   * @param path Path to navigate to.
+   * @returns Success of navigation.
    */
-  private _getRoute(routes: Route[], candidateTokens: string[]): Route {
+  public navigate(url: string): boolean {
+
+    url = this.sanitizePath(url);
+
+    // Get url tokens
+    let urlTokens = this.getPathTokens(url);
+    let urlMap = new Map();
+    
+    for (let token of urlTokens) {
+      urlMap.set(token, false);
+    }
+
+    let result = this._getRoute(this._routes, urlTokens, urlMap);
+
+    console.log(result);
+
+    if (result.length > 0) {
+      this._changeBrowserUrl(url);
+      this._addTemplatesToDom(result);
+      return true;
+    } 
+
+
+    return false;
+  }
+
+  private _getRoute(routes: Route[], urlTokens: string[], urlMap: Map<string, boolean>, routeHistory?: Route[]): Route[] {
+    routeHistory = routeHistory || [];
+
+    // iterate through routes
     for (let route of routes) {
+      // get route path tokens
       const routeTokens = this.getPathTokens(route.path);
-      const tokenMap = this._compareTokens(routeTokens, candidateTokens);
-      const consecutiveCount = this._getConsecutiveTokenMatchCount(tokenMap);
-      const isFullPathMatch = (consecutiveCount === tokenMap.size);
-      const isPartialMatch = (consecutiveCount < tokenMap.size && consecutiveCount !== 0);
+      urlMap = this._compareTokens(routeTokens, urlTokens, urlMap);
+      const consecutiveCount = this._countConsecutiveTokens(urlMap);
+      const isFullPathMatch = (consecutiveCount === urlMap.size);
+      const isPartialMatch = (consecutiveCount < urlMap.size && consecutiveCount !== 0);
 
       if (isFullPathMatch) {
-        return route;
+        routeHistory.push(route);
+        return routeHistory;
       }
-      
+
       if (isPartialMatch && route.children) {
-        const remainingTokens = routeTokens.slice(consecutiveCount - 1, routeTokens.length);
-        return this._getRoute(route.children, remainingTokens);
+        console.log('Partial Match hit');
+        routeHistory.push(route);
+        return this._getRoute(route.children, urlTokens, urlMap, routeHistory);
       }
     }
 
-    return undefined;
+    return [];
   }
 
-  /**
-   * Compare tokens
-   * 
-   * @param pathTokens        Tokens to check against
-   * @param candidateTokens   Candidate tokens
-   * @returns                 Map of tokens with match status
-   */
-  private _compareTokens(pathTokens: string[], candidateTokens: string[]) {
-    let tokenMap: Map<string, boolean> = new Map();
-
-    for (let i = 0; i < pathTokens.length; i++) {
-      const pathToken = pathTokens[i];
-      const condidateToken = candidateTokens[i];
-
-      const isMatch = (pathToken === condidateToken);
-
-      tokenMap.set(pathToken, isMatch)
+  private _compareTokens(routeTokens: string[], urlTokens: string[], urlMap: Map<string, boolean>) {
+    // for loop to count number of seen tokens
+    let seen = 0;
+    for (let token of urlTokens) {
+      if (urlMap.get(token)) { seen++;}
     }
 
-    return tokenMap;
+    if (seen > 0) {
+      urlTokens = urlTokens.slice(seen, routeTokens.length + 1);
+    }
+
+    // compare route tokens with url tokens
+    for (let it = 0; it < urlTokens.length; it++) {
+      const route = routeTokens[it];
+      const url = urlTokens[it];
+
+      if (!urlMap.get(url)) {
+        if (route === undefined) { return urlMap; }
+
+        if (route === url) {
+          urlMap.set(url, true);
+        }
+      }
+    }
+
+    return urlMap;
   }
+
 
   /**
    * Gets consecutive token match count
@@ -147,7 +158,7 @@ export default class Router {
    * @param tokenMap  Map of tokens
    * @return          Consecutive match count
    */
-  private _getConsecutiveTokenMatchCount(tokenMap: Map<string, boolean>) {
+  private _countConsecutiveTokens(tokenMap: Map<string, boolean>) {
     let count = 0;
     let isLastTokenAMatch = true;
 
@@ -209,4 +220,20 @@ export default class Router {
         .value;
     }
   }
+
+  /**
+   * Get the matched routes and add the templates to the DOM
+   * 
+   * @param routes    Matched routes
+   */
+  private _addTemplatesToDom(routes: Route[]): void {
+    for (let it = 0; it < routes.length; it++) {
+      console.log(it, routes);
+      const outlets = document.getElementsByTagName('router-outlet');
+      console.log('outlets', outlets)
+
+      outlets[it].innerHTML = routes[it].template;
+    }
+  }
+
 }
