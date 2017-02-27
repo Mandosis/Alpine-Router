@@ -3,6 +3,13 @@
 
 A no dependancy client-side router featuring child routes.
 
+**Planned Features:**
+
+- Wild Card Routes
+- Parameters
+- Protected Routes (Auth Guard)
+- `routerLink` element attribute to navigate to the assigned route on click
+
 # Instructions
 
 Create a new router in your JavaScript file
@@ -18,9 +25,22 @@ const router = new Router([
 ]);
 ```
 
-In your html file add the outlet
-```
-<router-outlet></router-outlet>
+In your index file
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Alpine Router</title>
+
+    <!-- Remove when loading from a file system instead of a server -->
+    <base href="/" />
+  </head>
+  <body>
+    <router-outlet></router-outlet>
+
+    <script src="app.js"></script>
+  </body>
+</html>
 ```
 
 To change routes use the navigate function
