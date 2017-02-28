@@ -21,6 +21,20 @@ const router = new Router([
   {
     path: '/',
     template: `<h1>Hello World!</h1>`
+  },
+  {
+    path: 'parent',
+    template: `<h1>Parent</h1><router-outlet></router-outlet>`,
+    children: [
+      {
+        path: 'child',
+        template: `<h2>Child</h2>`
+      }
+    ]
+  },
+  {
+    path: 'remote',
+    templateUrl: 'partials/example.html'
   }
 ]);
 ```
