@@ -1,7 +1,7 @@
 {
   "name": "alpine-router",
-  "version": "0.1.0",
-  "description": "A client-side router with no dependencies featuring child routes and built with the ES2015 JavaScript feature set using TypeScript.",
+  "version": "0.1.1",
+  "description": "A dependency free client-side router",
   "main": "src/router.ts",
   "jsnext:main": "dist/es6/router.js",
   "scripts": {
