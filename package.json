@@ -34,7 +34,7 @@
   "bugs": {
     "url": "https://github.com/Mandosis/Alpine-Router/issues"
   },
-  "homepage": "https://github.com/Mandosis/Alpine-Router#readme",
+  "homepage": "https://chrisrabuse.com/Alpine-Router",
   "devDependencies": {
     "@types/whatwg-fetch": "^0.0.33",
     "ava": "^0.17.0",
