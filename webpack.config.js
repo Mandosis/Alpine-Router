@@ -25,8 +25,8 @@ module.exports = [
     },
     output: {
         publicPath: path.resolve(__dirname),
-        filename: '[name].js',
-        sourceMapFilename: '[name].js.map',
+        filename: 'alpine-router.js',
+        sourceMapFilename: 'alpine-router.js.map',
         path: root('dist/browser'),
         library: 'AlpineRouter'
     },

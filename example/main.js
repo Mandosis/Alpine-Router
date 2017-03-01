@@ -17,6 +17,6 @@ let router = new AlpineRouter.default([
   },
   {
     path: 'remote',
-    templateUrl: 'http://chrisrabuse.com'
+    templateUrl: 'index.html'
   }
 ]);

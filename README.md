@@ -1,7 +1,9 @@
 # Alpine Router
 [![CircleCI](https://circleci.com/gh/Mandosis/Alpine-Router.svg?style=svg)](https://circleci.com/gh/Mandosis/Alpine-Router)
 
-A client-side router with no dependencies featuring child routes and built with the ES2015 JavaScript feature set using TypeScript.
+A dependency free client-side router featuring child routes.
+
+[View Demo](http://chrisrabuse.com/Alpine-Router)
 
 **Planned Features:**
 
@@ -15,7 +17,7 @@ A client-side router with no dependencies featuring child routes and built with 
 ## Install
 
 ```
-npm i -s alpine-router
+npm install --save alpine-router
 ```
 
 ## Initialize Router
@@ -34,10 +36,10 @@ const router = new Router([
 
 ### Browser Ready
 
-Load the library using. For compatability with Internet Explorer or older browsers polyfills are required for `window.fetch` and the `Map` global object.
+Load the library using. For compatability with Internet Explorer or older browsers polyfills are required for `fetch`, `Promise` and the `Map` global object.
 
 ```html
-<script src="dist/browser/router.js"></script>
+<script src="dist/browser/alpine-router.js"></script>
 ```
 
 Then initilize the router
@@ -52,10 +54,18 @@ var router = new AlpineRouter.default([
 ```
 
 ## Add Base Tag
-If you wish to use hash urls (`index.html#/example`) instead or are loading from a file system instead of a server do not add the base tag.
+
+A base tag is required in the head for friendly urls. If you wish to use hash urls or are loading from a file system instead of a server do not add the base tag.
 
 ```html
 <base href="/" />
+```
+
+## Add Router Outlet
+Add the router outlet to the body to render templates in.
+
+```
+<router-outlet></router-outlet>
 ```
 
 ## Navigate
@@ -91,8 +101,8 @@ To retrieve an external template, use `templateUrl` property instead of `templat
 ```javascript
 const router = new Router([
   {
-    path: 'remote',
-    templateUrl: 'partials/example.html'
+    path: 'external',
+    templateUrl: 'templates/example.html'
   }
 ]);
 ```

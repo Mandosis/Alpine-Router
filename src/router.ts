@@ -283,7 +283,7 @@ export default class Router {
    */
   private _getRemoteTemplate(url: string) {
     return new Promise((resolve, reject) => {
-      window.fetch(url)
+      fetch(url)
         .then((response) => response.text())
         .then((body: string) => resolve(body))
         .catch((error: string) => reject(error));
