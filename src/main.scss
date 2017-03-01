@@ -1,0 +1,380 @@
+@import '~normalize.css';
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:300,400,600,700');
+
+* {
+  box-sizing: border-box;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  // font-feature-settings: "kern" 1, "liga" 1, "swsh" 1;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Work Sans', sans-serif;
+  color: #212529;
+}
+
+h2, h3, h4, h5, h6 {
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+  font-weight: 600;
+}
+
+strong {
+  font-weight: 600;
+  color: #ced4da;
+}
+
+pre {
+  margin: 0;
+  width: 100%;
+  padding: 0;
+}
+code {
+  font-family: Consolas, "Courier New", monospace;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 19px;
+  width: 100%;
+  background: #343a40;
+  // border-radius: 0.5rem;
+  text-align: center;
+  display: block;
+  padding: 1rem;
+  color: #ced4da;
+  overflow: auto;
+
+  .keyword {
+    color: #20c997;
+  }
+
+  .string {
+    color: #a3daff;
+  }
+
+  .symbol {
+    color: #868e96;
+  }
+
+  .variable {
+    color: #ced4da;
+  }
+
+  .property {
+    color: #ff8787;
+  }
+
+}
+
+.alpine-green {
+  color: #087f5b;
+}
+
+#intro {
+  width: 100%;
+  min-height: 40rem;
+  padding: 0 10rem 0 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  h1 {
+    font-size: 3.8rem;
+    line-height: 7rem;
+    letter-spacing: 0.5rem;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0;
+  }
+
+  p {
+    color: #868e96;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .gh-icon {
+    margin-top: 2rem;
+    fill: #212529;
+  }
+
+  .subtext {
+    font-weight: 300;
+  }
+
+  .divider {
+    color: #868e96;
+  }
+}
+
+#install {
+  width: 100%;
+  padding: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #212529;
+  color: #f8f9fa;
+  text-align: center;
+
+  .content {
+    width: 57rem;
+    line-height: 2rem;
+  }
+}
+
+#instructions {
+  width: 100%;
+  padding: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #343a40;
+  color: #f8f9fa;
+  text-align: center;
+  margin-top: -0.04rem;
+
+  p {
+    color: #adb5bd;
+  }
+
+  code {
+    background: #212529;
+    text-align: left;
+  }
+
+  h3, h4 {
+    color: #ced4da;
+    text-transform: none;
+    margin-bottom: initial;
+  }
+
+  .content {
+    width: 57rem;
+    line-height: 2rem;
+  }
+}
+
+.skew {
+  transform: skew(0, -10deg);
+}
+
+.unskew {
+  transform: skew(0, 10deg);
+}
+
+.project {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #343a40;
+  color: #f8f9fa;
+  padding: 10rem;
+
+  .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .description {
+    max-width: 31.2rem;
+    line-height: 2rem;
+    margin-left: 3rem;
+
+    h2 {
+      margin-bottom: 1rem;
+      margin-top: 0;
+    }
+  }
+
+  .preview {
+    max-width: 31.2rem;
+    border-radius: 0.5rem;
+    box-shadow: 6px 24px 61px -12px rgba(0, 0, 0, 0.49);
+    height: auto;
+    width: 100%;
+
+    &:last-child {
+      display: none;
+    }
+  }
+
+  .button {
+    border-color: #f8f9fa;
+    color: #f8f9fa;
+
+    &:hover {
+      background: #f8f9fa;
+      color: #212529;
+    }
+  }
+
+  &:nth-child(even) {
+    background: #f8f9fa;
+    color: #212529;
+
+    .description {
+      margin-left: 0;
+      margin-right: 3rem;
+    }
+
+    .preview {
+      &:first-child {
+        display: none;
+      }
+
+      &:last-child {
+        display: initial;
+      }
+    }
+
+    .button {
+      border-color: #212529;
+      color: #212529;
+
+      &:hover {
+        background: #212529;
+        color: #f8f9fa;
+      }
+    }
+  }
+
+  &:nth-child(1) {
+    margin-top: -0.04rem;
+  }
+
+}
+
+.button {
+  background: none;
+  border: 2px solid #212529;
+  text-align: center;
+  text-transform: uppercase;
+  color: #212529;
+  padding: 0.9rem 1.5rem 0.8rem 1.5rem;
+  outline: none;
+  cursor: pointer;
+
+  &:hover {
+    background: #212529;
+    color: #f8f9fa;
+  }
+}
+
+.button-light {
+  border-color: #f8f9fa;
+  color: #f8f9fa;
+
+  &:hover {
+    background: #f8f9fa;
+    color: #212529;
+  }
+}
+
+footer {
+  margin-top: 9.2rem;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  font-size: 1rem;
+  color: #868e96;
+
+  a {
+    text-decoration: none;
+    color: #212529;
+    // border-bottom: 1px solid #868e96;
+  }
+}
+
+@media screen and (max-width: 1365px) {
+
+  #bio {
+    .content {
+      max-width: 57rem;
+    }
+  }
+
+  .project {
+    padding: 10rem 20rem;
+
+    .description {
+      text-align: center;
+      margin-top: 3rem;
+      margin-left: 0;
+      margin-right: 0;
+      width: 100%;
+
+      p {
+        text-align: start; 
+      }
+    }
+
+    &:nth-child(even) {
+      .description {
+        margin-right: 0;
+      }
+
+      .preview {        
+        &:first-child {
+          display: initial;
+        }
+
+        &:last-child {
+          display: none;
+        }
+      }
+    }
+    .preview {
+      &:last-child {
+        display: none;
+      }
+    }
+
+  }
+
+}
+
+@media screen and (max-width: 991px) {
+  #intro {
+    padding: 4rem;
+    min-height: auto;
+
+    h1 {
+      font-size: 1.8rem;
+      line-height: 4rem;
+    }
+  }
+
+  #install, #instructions {
+    padding: 8rem 2rem;
+  }
+
+  .project {
+    padding: 8rem 2rem;
+
+    .description {
+      text-align: center;
+      margin-top: 3rem;
+      margin-left: 0;
+      margin-right: 0;
+
+      p {
+        text-align: start; 
+      }
+    }
+
+    &:nth-child(even) {
+      .description {
+        margin-right: 0;
+      }
+    }
+
+    &:first-child {
+      margin-top: -0.13rem;
+    }
+  }
+}

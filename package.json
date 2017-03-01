@@ -1,0 +1,32 @@
+{
+  "name": "mandosis.github.io",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack -w"
+  },
+  "repository": "https://github.com/Mandosis/mandosis.github.io",
+  "author": "Chris Rabuse <rab233@live.com>",
+  "license": "MIT",
+  "dependencies": {
+    "normalize.css": "^5.0.0",
+    "typeface-work-sans": "^0.0.22"
+  },
+  "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-preset-es2015": "^6.22.0",
+    "clean-webpack-plugin": "^0.1.15",
+    "css-loader": "^0.26.2",
+    "extract-loader": "^0.1.0",
+    "file-loader": "^0.10.0",
+    "node-sass": "^4.5.0",
+    "raw-loader": "^0.5.1",
+    "resolve-url-loader": "^2.0.0",
+    "sass-loader": "^6.0.2",
+    "ts-loader": "^2.0.1",
+    "url-loader": "^0.5.8",
+    "webpack": "^2.2.1",
+    "webpack-node-externals": "^1.5.4"
+  }
+}
