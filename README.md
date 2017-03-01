@@ -1,7 +1,7 @@
-# Router
-[![CircleCI](https://circleci.com/gh/Mandosis/router.svg?style=svg)](https://circleci.com/gh/Mandosis/router)
+# Alpine Router
+[![CircleCI](https://circleci.com/gh/Mandosis/Alpine-Router.svg?style=svg)](https://circleci.com/gh/Mandosis/Alpine-Router)
 
-A no dependancy client-side router featuring child routes.
+A client-side router with no dependencies featuring child routes and built with the ES2015 JavaScript feature set using TypeScript.
 
 **Planned Features:**
 
@@ -12,16 +12,65 @@ A no dependancy client-side router featuring child routes.
 
 # Instructions
 
-Create a new router in your JavaScript file
+## Install
 
+```
+npm i -s alpine-router
+```
+
+## Initialize Router
+
+### ES2015+ or TypeScript
 ```javascript
-import Router from 'router';
+import Router from 'alpine-router';
 
 const router = new Router([
   {
     path: '/',
     template: `<h1>Hello World!</h1>`
-  },
+  }
+]);
+```
+
+### Browser Ready
+
+Load the library using. For compatability with Internet Explorer or older browsers polyfills are required for `window.fetch` and the `Map` global object.
+
+```html
+<script src="dist/browser/router.js"></script>
+```
+
+Then initilize the router
+
+```javascript
+var router = new AlpineRouter.default([
+  {
+    path: '/',
+    template: `<h1>Hello World!</h1>`
+  }
+]);
+```
+
+## Add Base Tag
+If you wish to use hash urls (`index.html#/example`) instead or are loading from a file system instead of a server do not add the base tag.
+
+```html
+<base href="/" />
+```
+
+## Navigate
+
+To change routes use the navigate function
+```javascript
+router.navigate('/');
+```
+
+## Child Routes
+
+Child routes are nested inside a parent route using the `children` property. For the child route to load a `<router-outlet>` tag is required in the parents template.
+
+```javascript
+const router = new Router([
   {
     path: 'parent',
     template: `<h1>Parent</h1><router-outlet></router-outlet>`,
@@ -31,7 +80,16 @@ const router = new Router([
         template: `<h2>Child</h2>`
       }
     ]
-  },
+  }
+]);
+```
+
+## External Templates
+
+To retrieve an external template, use `templateUrl` property instead of `template`.
+
+```javascript
+const router = new Router([
   {
     path: 'remote',
     templateUrl: 'partials/example.html'
@@ -39,28 +97,6 @@ const router = new Router([
 ]);
 ```
 
-In your index file
-```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Alpine Router</title>
-
-    <!-- Remove when loading from a file system instead of a server -->
-    <base href="/" />
-  </head>
-  <body>
-    <router-outlet></router-outlet>
-
-    <script src="app.js"></script>
-  </body>
-</html>
-```
-
-To change routes use the navigate function
-```javascript
-router.navigate('/');
-```
 
 # Development
 

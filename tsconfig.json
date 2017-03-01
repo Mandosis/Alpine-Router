@@ -8,7 +8,7 @@
     "emitDecoratorMetadata": true,
     "removeComments": true,
     "noImplicitAny": true,
-    "outDir": "lib/es6",
+    "outDir": "dist/es6",
     "lib": [
       "dom",
       "es2015",

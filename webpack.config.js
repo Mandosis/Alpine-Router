@@ -27,8 +27,8 @@ module.exports = [
         publicPath: path.resolve(__dirname),
         filename: '[name].js',
         sourceMapFilename: '[name].js.map',
-        path: root('lib/browser'),
-        library: 'Router'
+        path: root('dist/browser'),
+        library: 'AlpineRouter'
     },
     plugins: [
         new UglifyJsPlugin({

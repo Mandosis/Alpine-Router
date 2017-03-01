@@ -1,8 +1,9 @@
 {
   "name": "alpine-router",
-  "version": "0.0.1",
-  "description": "Client-side router for the browser",
-  "main": "lib/es6/router.js",
+  "version": "0.1.0",
+  "description": "A client-side router with no dependencies featuring child routes and built with the ES2015 JavaScript feature set using TypeScript.",
+  "main": "src/router.ts",
+  "jsnext:main": "dist/es6/router.js",
   "scripts": {
     "test": "rimraf .ava/**/* && tsc -p tsconfig.test.json && ava",
     "clean": "rimraf .ava/**/*",
@@ -10,7 +11,8 @@
     "ava-watch": "cls && ava -w",
     "test-watch": "tsc -p tsconfig.test.json -w",
     "build": "webpack -p && tsc",
-    "watch": "webpack -w"
+    "watch": "webpack -w",
+    "prepublish": "npm run build"
   },
   "ava": {
     "files": [
@@ -25,14 +27,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Mandosis/alpine-router.git"
+    "url": "git+https://github.com/Mandosis/Alpine-Router.git"
   },
   "author": "Chris Rabuse <me@chrisrabuse.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Mandosis/alpine-router/issues"
+    "url": "https://github.com/Mandosis/Alpine-Router/issues"
   },
-  "homepage": "https://github.com/Mandosis/alpine-router#readme",
+  "homepage": "https://github.com/Mandosis/Alpine-Router#readme",
   "devDependencies": {
     "@types/whatwg-fetch": "^0.0.33",
     "ava": "^0.17.0",
