@@ -95,7 +95,33 @@
   <span class="symbol">}
 ]);</span>
           </code>
-        </pre>      </div>
+        </pre>
+      </div>
+    </section>
+
+
+    <section id="demo" class="skew">
+      <div class="content unskew">
+        <h2>Demo</h2>
+
+        <ul>
+          <li id="demo-root">Root</li>
+          <li id="demo-parent">Parent</li>
+          <li id="demo-child">Child</li>
+          <li id="demo-external">External</li>
+        </ul>
+
+        <div class="browser-window">
+          <div class="browser-titlebar">
+            <div class="window-control"></div>
+            <div class="window-control minimize"></div>
+            <div class="window-control maximize"></div>
+          </div>
+          <div class="browser-viewport">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
     </section>
 
     <footer>
@@ -105,6 +131,6 @@
       </p>
     </footer>
 
-    <!--<script src="dist/main.bundle.js"></script>-->
+    <script src="dist/main.bundle.js"></script>
   </body>
 </html>

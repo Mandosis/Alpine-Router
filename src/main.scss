@@ -30,6 +30,7 @@ pre {
   margin: 0;
   width: 100%;
   padding: 0;
+  white-space: pre-wrap;
 }
 code {
   font-family: Consolas, "Courier New", monospace;
@@ -93,6 +94,7 @@ code {
     color: #868e96;
     text-transform: uppercase;
     margin: 0;
+    text-align: center;
   }
 
   .gh-icon {
@@ -156,6 +158,70 @@ code {
     line-height: 2rem;
   }
 }
+
+#demo {
+  width: 100%;
+  padding: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f8f9fa;
+  color: #212529;
+  text-align: center;
+
+  .content {
+    width: 57rem;
+    line-height: 2rem;
+  }
+
+  ul {
+    list-style: none;
+    margin: 1rem 0rem;
+    padding: 0;
+
+    li {
+      display: inline;
+      margin: 0.5rem;
+      cursor: pointer;
+    }
+  }
+
+  .browser-window {
+    width: 100%;
+    background: #FFF;
+    border-radius: 0.5rem;
+    border: 1px solid #ced4da;
+  }
+
+  .browser-titlebar {
+    width: 100%;
+    height: 2rem;
+    background: none;
+    border-bottom: 1px solid #ced4da;
+
+  }
+
+  .window-control {
+    height: 0.75rem;
+    width: 0.75rem;
+    background: none;
+    border-radius: 50%;
+    margin-top: 0.65rem;
+    margin-left: 0.65rem;
+    position: absolute;
+    border: 1px solid #ced4da;
+  }
+
+  .minimize {
+    margin-left: 2rem;
+  }
+
+  .maximize {
+    margin-left: 3.4rem;
+  }
+
+}
+
 
 .skew {
   transform: skew(0, -10deg);
