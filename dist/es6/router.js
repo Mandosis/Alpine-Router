@@ -7,7 +7,7 @@ export default class Router {
             }
         }
         else {
-            console.error('Router was not created. Did you enter an array of objects in the following format [{ path: "example", template: "<h1>Example</h1>"}]?');
+            console.error('Router: Failed to create router.\nDid you enter an array of objects in the following format [{ path: "example", template: "<h1>Example</h1>"}]?');
         }
         this._getWindowUrlAndNavigate();
         window.onhashchange = () => {
@@ -48,6 +48,7 @@ export default class Router {
             this._addTemplatesToDom(result);
             return true;
         }
+        console.error(`Router: No route found for path '${url}'.`);
         return false;
     }
     _getRoutes(routes, urlTokens, urlMap, routeHistory) {

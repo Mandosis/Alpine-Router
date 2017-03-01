@@ -21,7 +21,7 @@ export default class Router {
         this._routes.push(route);
       }
     } else {
-      console.error('Router was not created. Did you enter an array of objects in the following format [{ path: "example", template: "<h1>Example</h1>"}]?')
+      console.error('Router: Failed to create router.\nDid you enter an array of objects in the following format [{ path: "example", template: "<h1>Example</h1>"}]?')
     }
 
     this._getWindowUrlAndNavigate();
@@ -97,7 +97,7 @@ export default class Router {
       return true;
     } 
 
-
+    console.error(`Router: No route found for path '${url}'.`)
     return false;
   }
 
