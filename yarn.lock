@@ -52,8 +52,8 @@ alphanum-sort@^1.0.1, alphanum-sort@^1.0.2:
   resolved "https://registry.yarnpkg.com/alphanum-sort/-/alphanum-sort-1.0.2.tgz#97a1119649b211ad33691d9f9f486a8ec9fbe0a3"
 
 "alpine-router@git+https://github.com/Mandosis/Alpine-Router.git":
-  version "0.1.0"
-  resolved "git+https://github.com/Mandosis/Alpine-Router.git#09107154d9b33ba50fe6300e7c58a5db20a200c9"
+  version "0.1.1"
+  resolved "git+https://github.com/Mandosis/Alpine-Router.git#73a228b664fadf7f17fc67083514a691464da176"
 
 amdefine@>=0.0.4:
   version "1.0.1"

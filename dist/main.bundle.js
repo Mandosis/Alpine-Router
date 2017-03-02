@@ -63,69 +63,11 @@
 /******/ 	__webpack_require__.p = "D:\\Chris\\Workspace\\alpine\\router";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "main.bundle.css";
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _router = __webpack_require__(3);
-
-var _router2 = _interopRequireDefault(_router);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-__webpack_require__(0);
-
-
-var router = new _router2.default([{
-    path: '/',
-    template: '<h1>Root</h1>'
-}, {
-    path: 'parent',
-    template: '<h1>Parent</h1><router-outlet></router-outlet>',
-    children: [{
-        path: 'child',
-        template: '<h2>Child</h2>'
-    }]
-}, {
-    path: 'external',
-    templateUrl: 'templates/example.html'
-}]);
-
-var navElements = {
-    root: document.getElementById('demo-root'),
-    parent: document.getElementById('demo-parent'),
-    child: document.getElementById('demo-child'),
-    external: document.getElementById('demo-external')
-};
-
-navElements.root.addEventListener('click', function () {
-    return router.navigate('/');
-});
-navElements.parent.addEventListener('click', function () {
-    return router.navigate('parent');
-});
-navElements.child.addEventListener('click', function () {
-    return router.navigate('parent/child');
-});
-navElements.external.addEventListener('click', function () {
-    return router.navigate('external');
-});
-
-/***/ }),
-/* 2 */,
-/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -139,7 +81,7 @@ class Router {
             }
         }
         else {
-            console.error('Router was not created. Did you enter an array of objects in the following format [{ path: "example", template: "<h1>Example</h1>"}]?');
+            console.error('Router: Failed to create router.\nDid you enter an array of objects in the following format [{ path: "example", template: "<h1>Example</h1>"}]?');
         }
         this._getWindowUrlAndNavigate();
         window.onhashchange = () => {
@@ -180,6 +122,7 @@ class Router {
             this._addTemplatesToDom(result);
             return true;
         }
+        console.error(`Router: No route found for path '${url}'.`);
         return false;
     }
     _getRoutes(routes, urlTokens, urlMap, routeHistory) {
@@ -295,7 +238,7 @@ class Router {
     }
     _getRemoteTemplate(url) {
         return new Promise((resolve, reject) => {
-            window.fetch(url)
+            fetch(url)
                 .then((response) => response.text())
                 .then((body) => resolve(body))
                 .catch((error) => reject(error));
@@ -305,6 +248,62 @@ class Router {
 /* harmony export (immutable) */ __webpack_exports__["default"] = Router;
 
 //# sourceMappingURL=router.js.map
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "main.bundle.css";
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _router = __webpack_require__(0);
+
+var _router2 = _interopRequireDefault(_router);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+__webpack_require__(1);
+
+var router = new _router2.default([{
+    path: '/',
+    template: '<h1>Hello World!</h1><p>Use the buttons above to change routes!</p>'
+}, {
+    path: 'parent',
+    template: '<h1>Parent</h1><p>Child routes will be rendered below!</p><router-outlet></router-outlet>',
+    children: [{
+        path: 'child',
+        template: '<h2>Child</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque egestas iaculis leo quis viverra. Duis sodales nulla sem, vitae congue sapien luctus eget. Sed feugiat aliquam dapibus. Cras elementum, leo sed laoreet pulvinar, nunc nulla auctor lectus, in blandit est mauris ut sem. Sed a nibh urna. Etiam eget aliquam augue. Nunc id ornare justo, in finibus nibh. Nunc mattis, metus nec volutpat tempus, nisl sem sodales dolor, nec tincidunt ipsum mauris nec ex.</p>'
+    }]
+}, {
+    path: 'external',
+    templateUrl: 'templates/example.html'
+}]);
+
+var navElements = {
+    root: document.getElementById('demo-root'),
+    parent: document.getElementById('demo-parent'),
+    child: document.getElementById('demo-child'),
+    external: document.getElementById('demo-external')
+};
+
+navElements.root.addEventListener('click', function () {
+    return router.navigate('/');
+});
+navElements.parent.addEventListener('click', function () {
+    return router.navigate('parent');
+});
+navElements.child.addEventListener('click', function () {
+    return router.navigate('parent/child');
+});
+navElements.external.addEventListener('click', function () {
+    return router.navigate('external');
+});
 
 /***/ })
 /******/ ]);

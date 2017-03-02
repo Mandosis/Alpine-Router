@@ -28,9 +28,6 @@ module.exports = {
       { test: /\.(jpe?g|gif|png)?$/, loader: 'url-loader' }
     ]
   },
-  externals: [nodeExternals({
-    whitelist: [/\.(?!(?:jsx?|json)$).{1,5}$/i]
-  })],
   entry: {
     main: root('src/main.js'),
   },
