@@ -262,20 +262,20 @@ module.exports = __webpack_require__.p + "main.bundle.css";
 "use strict";
 
 
-var _router = __webpack_require__(0);
+var _alpineRouter = __webpack_require__(0);
 
-var _router2 = _interopRequireDefault(_router);
+var _alpineRouter2 = _interopRequireDefault(_alpineRouter);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 __webpack_require__(1);
 
-var router = new _router2.default([{
+var router = new _alpineRouter2.default([{
     path: '/',
-    template: '<h1>Hello World!</h1><p>Use the buttons above to change routes!</p>'
+    template: '<h1>Hello!</h1><p>Use the buttons above to change routes!</p>'
 }, {
     path: 'parent',
-    template: '<h1>Parent</h1><p>Child routes will be rendered below!</p><router-outlet></router-outlet>',
+    template: '<h1>Parent Route</h1><p>Child routes will be rendered below!</p><router-outlet></router-outlet>',
     children: [{
         path: 'child',
         template: '<h2>Child</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque egestas iaculis leo quis viverra. Duis sodales nulla sem, vitae congue sapien luctus eget. Sed feugiat aliquam dapibus. Cras elementum, leo sed laoreet pulvinar, nunc nulla auctor lectus, in blandit est mauris ut sem. Sed a nibh urna. Etiam eget aliquam augue. Nunc id ornare justo, in finibus nibh. Nunc mattis, metus nec volutpat tempus, nisl sem sodales dolor, nec tincidunt ipsum mauris nec ex.</p>'

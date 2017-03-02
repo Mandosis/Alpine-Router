@@ -1,15 +1,15 @@
 require('./main.scss')
 
-import Router from 'alpine-router/dist/es6/router';
+import Router from 'alpine-router';
 
 const router = new Router([
     {
         path: '/',
-        template: `<h1>Hello World!</h1><p>Use the buttons above to change routes!</p>`
+        template: `<h1>Hello!</h1><p>Use the buttons above to change routes!</p>`
     },
     {
         path: 'parent',
-        template: `<h1>Parent</h1><p>Child routes will be rendered below!</p><router-outlet></router-outlet>`,
+        template: `<h1>Parent Route</h1><p>Child routes will be rendered below!</p><router-outlet></router-outlet>`,
         children: [
             {
                 path: 'child',
