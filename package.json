@@ -2,7 +2,7 @@
   "name": "alpine-router",
   "version": "0.1.1",
   "description": "A dependency free client-side router",
-  "main": "dist/es6/routes.js",
+  "main": "dist/es6/router.js",
   "jsnext:main": "dist/es6/router.js",
   "types": "dist/typings/router.d.ts",
   "scripts": {
