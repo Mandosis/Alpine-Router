@@ -222,6 +222,16 @@ code {
 
   .browser-viewport {
     padding: 2rem;
+
+    h2, h3, h4, h5, h6 {
+      text-transform: initial;
+      margin-bottom: initial;
+      font-weight: bold;
+    }
+
+    strong {
+      color: #343a40;
+    }
   }
 
 }
