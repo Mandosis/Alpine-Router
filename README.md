@@ -8,6 +8,7 @@ A dependency free client-side router featuring child routes.
 **Planned Features:**
 
 - Wild Card Routes
+- Relative navigation
 - Parameters
 - Protected Routes (Auth Guard)
 - `routerLink` element attribute to navigate to the assigned route on click
