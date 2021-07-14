@@ -12,6 +12,7 @@ export interface Route {
  * Client-side router for single page applications
  */
 export default class Router {
+  private _current: Route[] = [];
   private _routes: Route[] = [];
 
   constructor(routes: Route[]) {
@@ -38,7 +39,7 @@ export default class Router {
 
   /**
    * Get tokens from a path
-   * 
+   *
    * @param path  Path to get tokens from
    * @returns     List of tokens from path
    */
@@ -49,13 +50,13 @@ export default class Router {
       let token = path;
       tokens = [''];
     }
-    
+
     return tokens;
   }
 
   /**
    * Sanitize path and remove # and / from the beginning
-   * 
+   *
    * @param path  Path to sanitize
    * @return      Sanitized path
    */
@@ -73,7 +74,7 @@ export default class Router {
 
   /**
    * Navigate to new path
-   * 
+   *
    * @param path Path to navigate to.
    * @returns Success of navigation.
    */
@@ -84,7 +85,7 @@ export default class Router {
     // Get url tokens
     let urlTokens = this.getPathTokens(url);
     let urlMap = new Map();
-    
+
     for (let token of urlTokens) {
       urlMap.set(token, false);
     }
@@ -94,8 +95,9 @@ export default class Router {
     if (result.length > 0) {
       this._changeBrowserUrl(url);
       this._addTemplatesToDom(result);
+      this._current = result;
       return true;
-    } 
+    }
 
     console.error(`Router: No route found for path '${url}'.`)
     return false;
@@ -103,7 +105,7 @@ export default class Router {
 
   /**
    * Match and return routes
-   * 
+   *
    * @param routes Routes to match
    * @param urlTokens URL Tokens
    * @param urlMap URL Map
@@ -166,7 +168,7 @@ export default class Router {
 
   /**
    * Gets consecutive token match count
-   * 
+   *
    * @param tokenMap  Map of tokens
    * @return          Consecutive match count
    */
@@ -205,7 +207,7 @@ export default class Router {
 
   /**
    * Changes url in address bar after the domain name
-   * 
+   *
    * @param path  Path to change url to
    */
   private _changeBrowserUrl(path: string) {
@@ -215,7 +217,7 @@ export default class Router {
 
   /**
    * Gets and appends the base href value if it exists
-   * 
+   *
    * @param url       URL for route
    * @return          modified url adjusted for base tag if it exists
    */
@@ -236,7 +238,7 @@ export default class Router {
 
   /**
    * Get value of of the href attribute in the base tag if it exists
-   * 
+   *
    * @returns Value of href attributes
    */
   private get _baseHrefValue(): string {
@@ -253,7 +255,7 @@ export default class Router {
 
   /**
    * Get the matched routes and add the templates to the DOM
-   * 
+   *
    * @param routes    Matched routes
    */
   private _addTemplatesToDom(routes: Route[]) {
@@ -261,6 +263,8 @@ export default class Router {
       const outlets = document.getElementsByTagName('router-outlet');
 
       if (!outlets[it]) { console.error('Router: router-outlet missing.')}
+
+      if (this._current[it] === routes[it]) continue;
 
       if (routes[it].template) {
         outlets[it].innerHTML = routes[it].template;
